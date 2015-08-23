@@ -235,6 +235,7 @@ public class MyBatisGenerator {
                     generatedXmlFiles, warnings);
         }
 
+        //吧生成好的文件，进行保存
         // now save the files
         callback.saveStarted(generatedXmlFiles.size()
                 + generatedJavaFiles.size());

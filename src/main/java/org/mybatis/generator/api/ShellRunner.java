@@ -103,6 +103,7 @@ public class ShellRunner {
         }
 
         try {
+        	//只有一个context
             ConfigurationParser cp = new ConfigurationParser(warnings);
             Configuration config = cp.parseConfiguration(configurationFile);
 
@@ -114,6 +115,7 @@ public class ShellRunner {
             ProgressCallback progressCallback = arguments.containsKey(VERBOSE) ? new VerboseProgressCallback()
                     : null;
 
+            //传入文件名啊fullyqualifiedTables
             myBatisGenerator.generate(progressCallback, contexts, fullyqualifiedTables);
 
         } catch (XMLParserException e) {

@@ -503,6 +503,7 @@ public class Context extends PropertyHolder {
                 callback.checkCancel();
 
                 introspectedTable.initialize();
+                //生成各类的java genenrator
                 introspectedTable.calculateGenerators(warnings, callback);
                 generatedJavaFiles.addAll(introspectedTable
                         .getGeneratedJavaFiles());

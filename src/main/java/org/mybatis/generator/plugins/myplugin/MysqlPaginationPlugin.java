@@ -63,9 +63,13 @@ public class MysqlPaginationPlugin extends PluginAdapterEnhance {
 	@Override
 	public boolean sqlMapSelectByExampleWithoutBLOBsElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
 		element.getElements().add(createPaginationXmlElement());
+		
+		System.out.println(element.toString());
+		
 		return super.sqlMapUpdateByExampleWithoutBLOBsElementGenerated(element, introspectedTable);
 	}
 
+	
 	/**
 	 * 创建limit的xmlElement
 	 * 
