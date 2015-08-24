@@ -67,7 +67,7 @@ public class GroupByPlugin extends PluginAdapterEnhance {
 	private XmlElement createPaginationXmlElement() {
 		XmlElement xmlElement = new XmlElement("if");
 		xmlElement.addAttribute(new Attribute("test", "groupBy == true"));
-		xmlElement.addElement(new TextElement("groupby #{column}"));
+		xmlElement.addElement(new TextElement("group by #{column}"));
 		return xmlElement; 
 	}
 }
