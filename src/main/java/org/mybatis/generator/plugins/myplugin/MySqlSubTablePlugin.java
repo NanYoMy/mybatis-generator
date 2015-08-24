@@ -10,23 +10,11 @@ import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 
-/**
- * 针对MySQL的分页插件
- * 
- * <pre>
- * 结果为：
- * 1. 在生成的*.xml文件添加limit
- * 2. 在生成的查询条件类(默认的后缀后*Example.java)添加offset与limitCount字段
- * </pre>
- * 
- * @author Patrick
- *
- */
-public class MysqlPaginationPlugin extends PluginAdapterEnhance {
+public class MySqlSubTablePlugin extends PluginAdapterEnhance{
 
 	private Logger log = Logger.getLogger(this.getClass());
 
-	public MysqlPaginationPlugin() {
+	public MySqlSubTablePlugin() {
 		log.debug("initialized");
 	}
 
@@ -37,16 +25,10 @@ public class MysqlPaginationPlugin extends PluginAdapterEnhance {
 	public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
 		
 		//添加filed
-		Field offsetField = new Field("offset", PrimitiveTypeWrapper.getIntegerInstance());
-		offsetField.setInitializationString("-1");
-		offsetField.setVisibility(JavaVisibility.PROTECTED);
-		addField(topLevelClass, introspectedTable, offsetField);
-
-		Field limitCountField = new Field("limitCount", PrimitiveTypeWrapper.getIntegerInstance());
-		limitCountField.setInitializationString("-1");
-		limitCountField.setVisibility(JavaVisibility.PROTECTED);
-		addField(topLevelClass, introspectedTable, limitCountField);
-
+		Field tableName = new Field("table", PrimitiveTypeWrapper.getIntegerInstance());
+		tableName.setInitializationString("bitch");
+		tableName.setVisibility(JavaVisibility.PROTECTED);
+		addField(topLevelClass, introspectedTable, tableName);
 		return super.modelExampleClassGenerated(topLevelClass, introspectedTable);
 	}
 
@@ -65,13 +47,9 @@ public class MysqlPaginationPlugin extends PluginAdapterEnhance {
 	@Override
 	public boolean sqlMapSelectByExampleWithoutBLOBsElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
 		element.getElements().add(createPaginationXmlElement());
-		
-		System.out.println(element.toString());
-		
 		return super.sqlMapUpdateByExampleWithoutBLOBsElementGenerated(element, introspectedTable);
 	}
 
-	
 	/**
 	 * 创建limit的xmlElement
 	 * 
@@ -83,4 +61,6 @@ public class MysqlPaginationPlugin extends PluginAdapterEnhance {
 		xmlElement.addElement(new TextElement("limit #{offset} , #{limitCount}"));
 		return xmlElement;
 	}
+	
+	
 }

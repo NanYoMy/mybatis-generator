@@ -103,7 +103,8 @@ public class ShellRunner {
         }
 
         try {
-        	//只有一个context
+        	
+        	//配置文件构建对象
             ConfigurationParser cp = new ConfigurationParser(warnings);
             Configuration config = cp.parseConfiguration(configurationFile);
 
