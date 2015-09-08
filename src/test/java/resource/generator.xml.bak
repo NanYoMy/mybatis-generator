@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 <!-- plugin要放到conment Generatro前面-->
 		<plugin type="org.mybatis.generator.plugins.myplugin.MysqlPaginationPlugin"></plugin>
 		<plugin type="org.mybatis.generator.plugins.myplugin.MysqlSplitingTablePlugin"></plugin>
-		<plugin type="org.mybatis.generator.plugins.myplugin.GroupByPlugin"></plugin>
+		<plugin type="org.mybatis.generator.plugins.myplugin.GroupByPlugin">
 	<commentGenerator> 
 		<property name="suppressDate" value="true"/> 
 		<property name="suppressAllComments" value="true"/> 

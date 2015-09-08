@@ -20,54 +20,46 @@ public class GroupByPlugin extends PluginAdapterEnhance {
 	}
 
 	/**
-	 * 在查询条件类中添加offset与limitCount字段
+	 * 在查询条件类中添加column
 	 */
 	@Override
 	public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-		Field isGroupBy = new Field("groupBy", PrimitiveTypeWrapper.getBooleanInstance());
-		isGroupBy.setInitializationString("false");
-		isGroupBy.setVisibility(JavaVisibility.PROTECTED);
-		addField(topLevelClass, introspectedTable, isGroupBy);
-
-		Field column = new Field("column", PrimitiveTypeWrapper.getStringInstance());
+		
+		Field column = new Field("groupByColumn", PrimitiveTypeWrapper.getStringInstance());
 		column.setInitializationString("null");
 		column.setVisibility(JavaVisibility.PROTECTED);
 		addField(topLevelClass, introspectedTable, column);
-
 		return super.modelExampleClassGenerated(topLevelClass, introspectedTable);
 	}
 
 	/**
-	 * 在xml的SelectByExample的SQL语句添加limit
+	 * 在xml的SelectByExample的SQL语句添加group
 	 */
 	@Override
 	public boolean sqlMapSelectByExampleWithBLOBsElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
-		element.getElements().add(createPaginationXmlElement());
+		element.getElements().add(createGroupByXmlElement());
 		return super.sqlMapSelectByExampleWithBLOBsElementGenerated(element, introspectedTable);
 	}
 
 	/**
-	 * 在xml的SelectByExampleWithoutBLOBs的SQL语句添加limit
+	 * 在xml的SelectByExampleWithoutBLOBs的SQL语句添group
 	 */
 	@Override
 	public boolean sqlMapSelectByExampleWithoutBLOBsElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
-		element.getElements().add(createPaginationXmlElement());
-		
-		System.out.println(element.toString());
-		
+		element.getElements().add(createGroupByXmlElement());
 		return super.sqlMapUpdateByExampleWithoutBLOBsElementGenerated(element, introspectedTable);
 	}
 
 	
 	/**
-	 * 创建limit的xmlElement
+	 * 创建group的xmlElement
 	 * 
 	 * @return
 	 */
-	private XmlElement createPaginationXmlElement() {
+	private XmlElement createGroupByXmlElement() {
 		XmlElement xmlElement = new XmlElement("if");
-		xmlElement.addAttribute(new Attribute("test", "groupBy == true"));
-		xmlElement.addElement(new TextElement("group by #{column}"));
+		xmlElement.addAttribute(new Attribute("test", "groupByColumn != null"));
+		xmlElement.addElement(new TextElement("group by #{groupByColumn}"));
 		return xmlElement; 
 	}
 }
