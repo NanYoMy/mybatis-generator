@@ -76,13 +76,15 @@ public class MysqlSplitingTablePlugin extends PluginAdapterEnhance {
 		//TODO
 		return true;
 	};
-	@Override
-	public boolean sqlMapCountByExampleElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
-		//TODO
-		return true;
-	};
 	
 
+	@Override
+	public boolean sqlMapCountByExampleElementGenerated(
+			XmlElement element, IntrospectedTable introspectedTable){
+		resetCountByExample(element);
+		return super.sqlMapCountByExampleElementGenerated(element, introspectedTable);
+	}
+	
 	/**
 	 * 在xml的SelectByExample的SQL语句添加limit
 	 */
@@ -147,6 +149,8 @@ public class MysqlSplitingTablePlugin extends PluginAdapterEnhance {
 		return super.sqlMapDeleteByExampleElementGenerated(element, introspectedTable);
 	}
 
+
+	
 	private void resetSelectXmlElementTableName(XmlElement element) {
 		List<Element> elements = element.getElements();
 		TextElement subSentence = new TextElement("from ${" + tableName + "}");
@@ -181,6 +185,16 @@ public class MysqlSplitingTablePlugin extends PluginAdapterEnhance {
 	private void resetUpdateXmlElementTableNameNotMapType(XmlElement element) {
 		List<Element> elements = element.getElements();
 		TextElement subSentence = new TextElement("update ${" + tableName + "}");
+		elements.set(0, subSentence);
+	}
+	
+	private void resetCountByExample(XmlElement element) {
+		List<Element> elements = element.getElements();
+		String content = elements.get(0).getFormattedContent(0);
+		String[] data = content.split(" ");
+		data[3] = "${" + tableName + "}";
+		TextElement subSentence = new TextElement(
+				MysqlSplitingTablePlugin.join(" ", data));
 		elements.set(0, subSentence);
 	}
 

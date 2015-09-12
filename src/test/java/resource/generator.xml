@@ -15,13 +15,13 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		<property name="suppressAllComments" value="true"/> 
 	</commentGenerator> 
 <!--数据库链接地址账号密码-->
-<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/world" userId="root" password="123456"> 
+<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test_data" userId="root" password="123456"> 
 </jdbcConnection> 
 <javaTypeResolver> 
 	<property name="forceBigDecimals" value="false"/> 
 </javaTypeResolver> 
 <!--生成Model类存放位置--> 
-<javaModelGenerator targetPackage="com.my.pojo" targetProject="D:\src"> 
+<javaModelGenerator targetPackage="com.gexin.oms.core.model" targetProject="D:\src"> 
 	<property name="enableSubPackages" value="true"/> 
 	<property name="trimStrings" value="true"/> 
 </javaModelGenerator> 
@@ -30,11 +30,11 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 	<property name="enableSubPackages" value="true"/> 
 </sqlMapGenerator> 
 <!--生成Dao类存放位置--> 
-<javaClientGenerator type="XMLMAPPER" targetPackage="com.my.dao" targetProject="D:\src"> 
+<javaClientGenerator type="XMLMAPPER" targetPackage="com.gexin.oms.core.dao" targetProject="D:\src"> 
 	<property name="enableSubPackages" value="true"/> 
 </javaClientGenerator> 
 <!--生成对应表及类名-->  
-<table tableName="city">
+<table tableName="history">
 </table> 
 </context> 
 </generatorConfiguration>
