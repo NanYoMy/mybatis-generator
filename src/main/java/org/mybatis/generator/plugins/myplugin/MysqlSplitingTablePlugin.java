@@ -1,7 +1,6 @@
 package org.mybatis.generator.plugins.myplugin;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -9,7 +8,6 @@ import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.api.dom.java.PrimitiveTypeWrapper;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
-import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.api.dom.xml.Element;
